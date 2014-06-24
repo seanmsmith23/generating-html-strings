@@ -4,6 +4,13 @@ class HTMLGenerator
     @given = string
   end
 
+  def replace_content(output)
+    if @given.include?("CONTENT")
+      @given.sub("CONTENT", output)
+    else output
+    end
+  end
+
   def section(string)
     output = "<section>" + string + "</section>"
     replace_content(output)
@@ -25,13 +32,6 @@ class HTMLGenerator
       output = "<button class='#{class_type}'>" + string + "</button>"
     end
     replace_content(output)
-    end
-
-    def replace_content(output)
-      if @given.include?("CONTENT")
-        @given.sub("CONTENT", output)
-      else output
-      end
-    end
+  end
 
 end
