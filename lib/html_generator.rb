@@ -6,7 +6,7 @@ class HTMLGenerator
 
   def section(string)
     output = "<section>" + string + "</section>"
-    replace_content?(output)
+    replace_content(output)
   end
 
   def unordered_list(array_of_strings)
@@ -14,7 +14,7 @@ class HTMLGenerator
     unordered_lists = "<ul>#{list_items}</ul>"
     output = unordered_lists
 
-    replace_content?(output)
+    replace_content(output)
   end
 
   def button(string, type_hash=nil)
@@ -24,10 +24,10 @@ class HTMLGenerator
       class_type = type_hash.values_at(:class).join
       output = "<button class='#{class_type}'>" + string + "</button>"
     end
-    replace_content?(output)
+    replace_content(output)
     end
 
-    def replace_content?(output)
+    def replace_content(output)
       if @given.include?("CONTENT")
         @given.sub("CONTENT", output)
       else output
