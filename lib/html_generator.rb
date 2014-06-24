@@ -13,14 +13,10 @@ class HTMLGenerator
   end
 
   def unordered_list(array_of_strings)
-    open_list = "<ul>"
-    close_list = "</ul>"
-    li = "<li>"
-    close_li = "</li>"
+    list_items = array_of_strings.map { |item| "<li>" + item + "</li>" }.join
+    unordered_lists = "<ul>#{list_items}</ul>"
+    output = unordered_lists
 
-    list_with_input = array_of_strings.map { |item| li + item + close_li }
-
-    output = open_list + list_with_input.join + close_list
     if @given.include?("CONTENT")
       @given.sub("CONTENT", output)
     else output
@@ -34,6 +30,7 @@ class HTMLGenerator
       class_type = type_hash.values_at(:class).join
       output = "<button class='#{class_type}'>" + string + "</button>"
     end
+
     if @given.include?("CONTENT")
       @given.sub("CONTENT", output)
     else output
